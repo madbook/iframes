@@ -1,0 +1,16 @@
+{
+  "extends": "reddit",
+  "rules": {
+    "quote-props": [2, "as-needed", {"keywords": true}],
+    // we only use require when non-global is needed
+    "global-require": 0,
+    "no-unused-vars": [2, {"ignoreRestSiblings": true}],
+    // server logging should be done via server/helpers/logger.
+    // client side logging is useless.
+    "no-console": "error"
+  },
+  "env": {
+    "jest": true,
+    "browser": true
+  }
+}
