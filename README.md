@@ -5,6 +5,9 @@ A library for interacting with `<iframes />`.
 #### v0.0.0
 Initial release
 
+#### v0.1.1
+Transform modules to commonjs
+
 ## Installation
 yarn add @r/frames -s
 
