@@ -106,7 +106,7 @@ export const receiveMessage = (source, type, callback, context) => {
       return;
     }
 
-    callback.apply(context, e, ...rest);
+    callback.apply(context, [e].concat(rest));
   };
 
   addEventListener(type, scoped);
