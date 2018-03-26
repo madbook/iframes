@@ -174,7 +174,10 @@ function handleReceiveMessage(e) {
     return;
   }
 
-  const message = JSON.parse(e.data);
+  let message = {};
+  try {
+    message = JSON.parse(e.data);
+  } catch (e) {}
   const type = message.type;
 
   // Namespace doesn't match, ignore
