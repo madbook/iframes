@@ -195,8 +195,14 @@ function handleReceiveMessage(e) {
     ));
   }
 
-  const customEvent = new CustomEvent(type, { detail: message.data });
-  customEvent.source = e.source;
+  if (tyepof Event === 'function') {
+    const customEvent = new CustomEvent(type, { detail: message.data });
+    customEvent.source = e.source;
+  } else {
+    // ie 11 compatibility
+    const customEvent = document.createEvent('CustomEvent');
+    customEvent.initCustomEvent(type, true, true, message.data);
+  }
 
   global.dispatchEvent(customEvent);
 }
