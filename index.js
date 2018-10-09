@@ -151,6 +151,22 @@ export const removePostMessageOrigin = (origin) => {
   }
 };
 
+// Polyfill for CustomEvent based on recommendation here
+// https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+let CustomEvent = global.CustomEvent;
+if (typeof CustomEvent !== "function") {
+  const defaultEventInit = { bubbles: false, cancelable: false, detail: undefined };
+
+  CustomEvent = function CustomEvent(typeArg, customEventInit) {
+    customEventInit = customEventInit || defaultEventInit;
+    const event = document.createEvent('CustomEvent');
+    event.initCustomEvent(typeArg, customEventInit.bubbles, customEventInit.cancelable, customEventInit.detail);
+    return event;
+  }
+
+  CustomEvent.prototype = global.Event.prototype;
+}
+
 /*
  * Adds an allowed origin to be listened to.
  * param {String} origin The origin to be added.
